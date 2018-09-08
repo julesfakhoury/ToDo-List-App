@@ -1,7 +1,6 @@
 altgraph==0.16.1
 antiorm==1.2.1
 click==6.7
-cx-Freeze==5.1.1
 db==0.1.1
 db-sqlite3==0.0.1
 Flask==1.0.2
