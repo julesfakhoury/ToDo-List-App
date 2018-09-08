@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>To-do List App</title>
+</head>
+<body>
+    <div>
+        <h2>My To-Do List</h2>
+        <form action="{{ url_for('add_item') }}" method="POST">
+            <input type="text" name="item">
+            <input type="submit" value="Add">
+        </form>
+        <ol>
+            {% for item in items %}
+            <li style="font-size: 15pt">
+                {% if item.done %}
+                    <form style="display:inline;" action="{{ url_for('update_item', item_id=item.id) }}" method="POST">
+                        <input type="hidden" name="done" value="" />
+                        <a style="text-decoration: none; color: black" href="#" onclick="this.parentNode.submit()"><s>{{ item.text }} </s></a>
+                    </form>
+                {% else %}
+                    {{ item.text }}
+                    <form style="display:inline;" action="{{ url_for('update_item', item_id=item.id) }}" method="POST">
+                        <input type="hidden" name="done" value=True />
+                        <a href="#" onclick="this.parentNode.submit()"><span class="glyphicon glyphicon-check"></a>
+                    </form>
+                {% endif %}
+                <a href="{{ url_for('delete_item', item_id=item.id) }}"><span class="glyphicon glyphicon-trash"></span></a>
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+</body>
+</html>
