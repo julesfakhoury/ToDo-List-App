@@ -1,26 +1,12 @@
 
 from flask import Flask, redirect, render_template, url_for
-from flask_sqlalchemy import SQLAlchemy
 from decorators import require_request_params
+from models import db, ToDoItems
 
 
 app = Flask(__name__)
 app.config.from_pyfile('config.cfg')
-db = SQLAlchemy(app)
-
-
-class ToDoItems(db.Model):
-    """
-    Class used to represent to-do items
-
-    Attributes:
-        (int) id: id of item
-        (str) text: content of item
-        (bool) done: True if item completed, otherwise False
-    """
-    id = db.Column(db.Integer, primary_key=True)
-    text = db.Column(db.String(200))
-    done = db.Column(db.Boolean)
+db.init_app(app)
 
 
 @app.route('/')
