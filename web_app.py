@@ -1,7 +1,7 @@
 
-from flask import Flask, redirect, render_template, url_for
 from decorators import require_request_params
 from models import db, ToDoItems
+from flask import Flask, redirect, render_template, url_for
 
 
 app = Flask(__name__)
